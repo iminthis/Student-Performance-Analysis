@@ -300,7 +300,7 @@ export default function DecisionTreeChart() {
 
       {/* Tree visualization */}
       <div className="overflow-x-auto pb-4">
-        <div className="min-w-[800px] flex justify-center">
+        <div className="inline-flex min-w-full justify-center px-4">
           <TreeNode
             node={decisionTree}
             depth={0}
