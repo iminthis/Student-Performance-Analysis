@@ -4,8 +4,29 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ChartWrapper from '@/components/ui/ChartWrapper';
 
+// Type definitions for tree nodes
+interface LeafNode {
+  id: string;
+  prediction: number;
+  label: string;
+  description: string;
+  samples: number;
+}
+
+interface DecisionNode {
+  id: string;
+  variable: string;
+  threshold: string;
+  label: string;
+  description: string;
+  left: TreeNode;
+  right: TreeNode;
+}
+
+type TreeNode = LeafNode | DecisionNode;
+
 // Decision tree structure based on typical findings from student performance analysis
-const decisionTree = {
+const decisionTree: DecisionNode = {
   id: 'root',
   variable: 'failures',
   threshold: '> 0',
@@ -98,7 +119,7 @@ const decisionTree = {
 };
 
 interface TreeNodeProps {
-  node: typeof decisionTree;
+  node: TreeNode;
   depth: number;
   path: string[];
   activePath: string[];
@@ -135,10 +156,10 @@ function TreeNode({ node, depth, path, activePath, onNodeClick }: TreeNodeProps)
         {isLeaf ? (
           <>
             <div className="text-2xl font-bold font-mono text-accent-teal">
-              {(node as { prediction: number }).prediction}
+              {(node as LeafNode).prediction}
             </div>
             <div className="text-xs text-gray-400 mt-1">
-              n = {(node as { samples: number }).samples}
+              n = {(node as LeafNode).samples}
             </div>
           </>
         ) : (
@@ -157,7 +178,7 @@ function TreeNode({ node, depth, path, activePath, onNodeClick }: TreeNodeProps)
             <div className="h-8 border-l-2 border-slate-600" />
             <div className="text-xs text-accent-coral mb-2 font-mono">No</div>
             <TreeNode
-              node={(node as typeof decisionTree).left!}
+              node={(node as DecisionNode).left}
               depth={depth + 1}
               path={currentPath}
               activePath={activePath}
@@ -170,7 +191,7 @@ function TreeNode({ node, depth, path, activePath, onNodeClick }: TreeNodeProps)
             <div className="h-8 border-l-2 border-slate-600" />
             <div className="text-xs text-accent-teal mb-2 font-mono">Yes</div>
             <TreeNode
-              node={(node as typeof decisionTree).right!}
+              node={(node as DecisionNode).right}
               depth={depth + 1}
               path={currentPath}
               activePath={activePath}
@@ -225,14 +246,14 @@ export default function DecisionTreeChart() {
     setActiveProfile(profile.name);
   };
 
-  const findNode = (tree: typeof decisionTree, id: string): typeof decisionTree | null => {
+  const findNode = (tree: TreeNode, id: string): TreeNode | null => {
     if (tree.id === id) return tree;
-    if ('left' in tree && tree.left) {
-      const found = findNode(tree.left as typeof decisionTree, id);
+    if ('left' in tree) {
+      const found = findNode(tree.left, id);
       if (found) return found;
     }
-    if ('right' in tree && tree.right) {
-      const found = findNode(tree.right as typeof decisionTree, id);
+    if ('right' in tree) {
+      const found = findNode(tree.right, id);
       if (found) return found;
     }
     return null;
@@ -317,10 +338,10 @@ export default function DecisionTreeChart() {
                 {'prediction' in activeNode && (
                   <div className="mt-2 flex items-center gap-4">
                     <span className="text-accent-teal font-mono text-lg">
-                      Predicted Grade: {(activeNode as { prediction: number }).prediction}
+                      Predicted Grade: {(activeNode as LeafNode).prediction}
                     </span>
                     <span className="text-gray-500 text-sm">
-                      ({(activeNode as { samples: number }).samples} students in this group)
+                      ({(activeNode as LeafNode).samples} students in this group)
                     </span>
                   </div>
                 )}

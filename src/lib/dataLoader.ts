@@ -18,7 +18,7 @@ export async function loadStudentData(): Promise<Student[]> {
             .filter((s): s is Student => s !== null);
           resolve(students);
         },
-        error: (error) => {
+        error: (error: Error) => {
           reject(error);
         },
       });

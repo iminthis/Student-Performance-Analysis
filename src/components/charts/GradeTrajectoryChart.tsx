@@ -113,10 +113,11 @@ export default function GradeTrajectoryChart() {
           <Tooltip
             content={({ active, payload, label }) => {
               if (!active || !payload?.length) return null;
+              const value = payload[0]?.value;
               return (
                 <div className="tooltip">
                   <p className="font-semibold">{label}</p>
-                  <p>Mean: {payload[0]?.value?.toFixed(1)}</p>
+                  <p>Mean: {typeof value === 'number' ? value.toFixed(1) : value}</p>
                 </div>
               );
             }}
