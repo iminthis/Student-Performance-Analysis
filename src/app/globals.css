@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-primary: #0f1629;
+  --color-bg-secondary: #1a2234;
+  --color-bg-tertiary: #242d42;
+  --color-accent-coral: #FF6B6B;
+  --color-accent-teal: #4ECDC4;
+  --color-accent-gold: #FFE66D;
+  --color-accent-purple: #9B59B6;
+  --color-accent-blue: #3498DB;
+  --color-accent-green: #2ECC71;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0f1629 0%, #1a2234 50%, #0f1629 100%);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(78, 205, 196, 0.3);
+    color: #fff;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1a2234;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3a4a6b;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a5a7b;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-teal via-accent-blue to-accent-purple;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-accent-teal to-accent-blue text-slate-900 font-semibold rounded-xl 
+           hover:shadow-lg hover:shadow-accent-teal/20 transition-all duration-300 transform hover:-translate-y-0.5;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border border-slate-600 text-gray-200 font-medium rounded-xl 
+           hover:bg-slate-800 hover:border-slate-500 transition-all duration-300;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold mb-4;
+  }
+
+  .chart-container {
+    @apply glass-card p-6 md:p-8;
+  }
+
+  .stat-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-mono;
+  }
+
+  .nav-link {
+    @apply text-gray-400 hover:text-white transition-colors duration-200 relative;
+  }
+
+  .nav-link.active {
+    @apply text-white;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-teal rounded-full;
+  }
+
+  .filter-button {
+    @apply px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200;
+  }
+
+  .filter-button.active {
+    @apply bg-accent-teal/20 text-accent-teal border border-accent-teal/30;
+  }
+
+  .filter-button:not(.active) {
+    @apply bg-slate-800/50 text-gray-400 border border-slate-700 hover:border-slate-600 hover:text-gray-300;
+  }
+
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm bg-slate-800 border border-slate-700 rounded-lg shadow-xl pointer-events-none;
+  }
+
+  .takeaway-box {
+    @apply bg-gradient-to-r from-accent-teal/10 to-accent-blue/10 border-l-4 border-accent-teal 
+           rounded-r-xl p-4 md:p-6;
+  }
+
+  .stats-note {
+    @apply bg-slate-800/80 border border-slate-700 rounded-lg p-4 font-mono text-sm text-gray-300;
+  }
+
+  .how-to-read {
+    @apply text-gray-400 text-sm italic mb-4;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Recharts customization */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #2a3a5b;
+}
+
+.recharts-text {
+  fill: #9ca3af;
+  font-size: 12px;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* D3 chart styling */
+.d3-axis text {
+  fill: #9ca3af;
+  font-size: 11px;
+}
+
+.d3-axis line,
+.d3-axis path {
+  stroke: #3a4a6b;
+}
+
+.d3-grid line {
+  stroke: #2a3a5b;
+  stroke-dasharray: 2, 2;
+}
+
+/* Loading animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.loading-skeleton {
+  background: linear-gradient(90deg, #1a2234 0%, #2a3a5b 50%, #1a2234 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
