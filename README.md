@@ -1,7 +1,5 @@
 # Portuguese High School Math Performance Analysis
 
-A polished, portfolio-quality web application that showcases interactive data storytelling and visualization exploring factors that influence student mathematics performance.
-
 ![Next.js](https://img.shields.io/badge/Next.js-14-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38bdf8)
@@ -49,49 +47,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 2. Copy your `student-mat.csv` file to `public/data/student-mat.csv`
 3. The CSV should use semicolon (`;`) as delimiter (UCI format)
 
-## 📁 Project Structure
-
-```
-math-performance-app/
-├── public/
-│   └── data/
-│       └── student-mat.csv          # Place your data here
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx               # Root layout with fonts & providers
-│   │   ├── globals.css              # Global styles & Tailwind config
-│   │   ├── page.tsx                 # Landing page
-│   │   ├── story/page.tsx           # Main data story with all charts
-│   │   ├── methods/page.tsx         # Methodology explanation
-│   │   └── about/page.tsx           # About page with citations
-│   ├── components/
-│   │   ├── charts/
-│   │   │   ├── StudyTimeChart.tsx   # RQ1: Study time vs grades
-│   │   │   ├── FailuresChart.tsx    # RQ1: Past failures impact
-│   │   │   ├── GradeTrajectoryChart.tsx  # RQ1: G1→G2→G3 progression
-│   │   │   ├── SupportDensityChart.tsx   # RQ2: Support systems
-│   │   │   ├── ParentEducationChart.tsx  # RQ2: Parental education
-│   │   │   ├── PCAChart.tsx         # RQ3: Principal components
-│   │   │   ├── AlcoholChart.tsx     # RQ3: Alcohol consumption
-│   │   │   ├── GoingOutChart.tsx    # RQ3: Social activity
-│   │   │   └── DecisionTreeChart.tsx # Synthesis: Interactive tree
-│   │   └── ui/
-│   │       ├── ChartWrapper.tsx     # Reusable chart container
-│   │       ├── FilterBar.tsx        # Global filter controls
-│   │       ├── Navigation.tsx       # App navigation
-│   │       └── LoadingState.tsx     # Loading & empty states
-│   ├── context/
-│   │   └── DataContext.tsx          # React context for data & filters
-│   ├── lib/
-│   │   ├── dataLoader.ts            # CSV parsing & statistics
-│   │   └── dataDictionary.ts        # Variable labels & descriptions
-│   └── types/
-│       └── student.ts               # TypeScript type definitions
-├── tailwind.config.ts
-├── tsconfig.json
-└── package.json
-```
-
 ## 📊 Features
 
 ### Data Storytelling
@@ -116,43 +71,6 @@ math-performance-app/
 - **Responsive design**: Works on mobile, tablet, and desktop
 - **Smooth animations**: Framer Motion transitions
 - **Accessibility**: Proper contrast, focus states, semantic HTML
-
-## 🚢 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Vercel will automatically detect Next.js and deploy
-
-```bash
-# Or deploy manually
-npm install -g vercel
-vercel
-```
-
-### Static Export
-
-```bash
-# Build static files
-npm run build
-
-# Output will be in /out directory
-# Deploy to any static hosting (GitHub Pages, Netlify, etc.)
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-No environment variables required. All data is loaded statically from `/public/data/`.
-
-### Customization
-
-- **Colors**: Edit `tailwind.config.ts` accent colors
-- **Fonts**: Change fonts in `src/app/layout.tsx`
-- **Content**: Update text in page components
-- **Author info**: Edit `src/app/about/page.tsx`
 
 ## 📚 Data Dictionary
 
@@ -189,6 +107,4 @@ Dataset: [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/3
 MIT License - feel free to use this for your own portfolio!
 
 ---
-
-Built with ❤️ using Next.js, TypeScript, Tailwind CSS, Recharts, and Framer Motion.
 
